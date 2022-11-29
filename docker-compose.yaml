@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+
+  php:
+    container_name: localhost_php
+    image: ghcr.io/local-deploy/php8.1-fpm
+
+    ports:
+      - "9000:9000"
+    environment:
+      - "DOCUMENT_ROOT=/var/www/"
+      - "HOST_NAME=${HOST_NAME:-localhost}"
+      - "LOCALTIME=${LOCALTIME:-Europe/Moscow}"
+      - "PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-256M}"
+      - "PHP_POST_MAX_SIZE=${PHP_POST_MAX_SIZE:-100M}"
+      - "PHP_UPLOAD_MAX_FILESIZE=${PHP_UPLOAD_MAX_FILESIZE:-100M}"
+      - "PHP_MAX_FILE_UPLOADS=${PHP_MAX_FILE_UPLOADS:-50}"
+      - "PHP_MAX_EXECUTION_TIME=${PHP_MAX_EXECUTION_TIME:-60}"
+      - "XDEBUG=develop"
+      - "XDEBUG_IDE_KEY=${XDEBUG_IDE_KEY:-PHPSTORM}"
+      - "XDEBUG_PORT=${XDEBUG_PORT:-9003}"
+
+    volumes:
+      - "./:/var/www/"
+
+  nginx:
+    container_name: localhost_nginx
+    image: nginx:alpine
+    working_dir: "/var/www"
+    ports:
+      - "80:80"
+
+    volumes:
+      - "./:/var/www/"
+      - "./nginx.conf:/etc/nginx/conf.d/default.conf"
+    depends_on:
+      - php
+
+    networks:
+      default:
+        aliases:
+          - test-task_default
