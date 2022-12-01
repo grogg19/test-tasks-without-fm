@@ -5,3 +5,4 @@
 /.local/
 /.idea/
 /.docker/
+/.env
