@@ -33,14 +33,14 @@ if (! function_exists('array_get')) {
         $levels = explode('.', $key);
 
         // Ищем в массиве $levels ключ, совпадающий с ключом в массиве $currentLevel
-        foreach ($levels as $keyLevel) {
-            // Если такой ключ есть и $currentLevel[$keyLevel] является массивом
-            if (array_key_exists($key, $currentLevel) && is_array($currentLevel[$keyLevel])) {
-                // $currentLevel становится ссылкой на $currentLevel[$keyLevel]
-                $currentLevel =& $currentLevel[$keyLevel];
+        foreach ($levels as $levelKey) {
+            // Если такой ключ есть и $currentLevel[$levelKey] является массивом
+            if (array_key_exists($levelKey, $currentLevel) && is_array($currentLevel[$levelKey])) {
+                // $currentLevel становится ссылкой на $currentLevel[$levelKey]
+                $currentLevel =& $currentLevel[$levelKey];
             } else {
-                // Иначе, возвращает значение $currentLevel[$keyLevel] или значение по дефолту
-                return ((empty($currentLevel[$keyLevel])) ? $default : $currentLevel[$keyLevel]);
+                // Иначе, возвращает значение $currentLevel[$levelKey] или значение по дефолту
+                return ((empty($currentLevel[$levelKey])) ? $default : $currentLevel[$levelKey]);
             }
         }
         // возвращает значение $currentLevel или значение по дефолту
