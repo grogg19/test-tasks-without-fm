@@ -3,13 +3,13 @@ version: "3.8"
 services:
 
   php:
-    container_name: localhost_php
+    container_name: ${HOST_NAME}_php
     image: ghcr.io/local-deploy/php8.1-fpm
 
     ports:
       - "9000:9000"
     environment:
-      - "DOCUMENT_ROOT=/var/www/"
+      - "DOCUMENT_ROOT=${DOCUMENT_ROOT:-/var/www/}"
       - "HOST_NAME=${HOST_NAME:-localhost}"
       - "LOCALTIME=${LOCALTIME:-Europe/Moscow}"
       - "PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-256M}"
@@ -25,7 +25,7 @@ services:
       - "./:/var/www/"
 
   nginx:
-    container_name: localhost_nginx
+    container_name: ${HOST_NAME}_nginx
     image: nginx:alpine
     working_dir: "/var/www"
     ports:
@@ -42,15 +42,15 @@ services:
         aliases:
           - test-task_default
   db:
-    container_name: localhost_db
-    image: alterway/mysql:8.0
+    container_name: ${HOST_NAME}_db
+    image: alterway/mysql:${MYSQL_VERSION}
     command: --innodb_strict_mode=off --innodb_flush_log_at_trx_commit=2 --innodb_flush_method=O_DIRECT --transaction-isolation=READ-COMMITTED --sql_mode=
     environment:
-      MYSQL_DATABASE: db
-      MYSQL_USER: db
-      MYSQL_PASSWORD: db
-      MYSQL_ROOT_PASSWORD: root
-      LOCALTIME: Europe/Moscow
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      LOCALTIME: ${LOCALTIME:-Europe/Moscow}
     volumes:
       - "./.docker/volume/db/:/var/lib/mysql/:delegated"
     ports:
