@@ -12,6 +12,5 @@ $secondNumber = '182383919383719287394789879479308039128039803347593487492831203
 
 $secondTask = new SecondTask();
 $sum        = $secondTask->makeSumTwoBigNumbers($firstNumber, $secondNumber);
-dump($sum, strlen($firstNumber), strlen($secondNumber));
-
+echo $sum;
 
