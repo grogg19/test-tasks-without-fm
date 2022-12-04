@@ -1,31 +1,18 @@
 <?php
 
-use Illuminate\Support\Env;
 use App\Config;
 
-if (! function_exists('env')) {
-    /**
-     * Gets the value of an environment variable.
-     *
-     * @param  string  $key
-     * @param  mixed  $default
-     * @return mixed
-     */
-    function env($key, $default = null)
-    {
-        return Env::get($key, $default);
-    }
-}
-
-if (! function_exists('array_get')) {
+if (!function_exists('array_get')) {
     /**
      * Функция возращает значение из массива $array с ключом $key вида "key1.key2.***.value"
-     * @param array $array
+     *
+     * @param array  $array
      * @param string $key
-     * @param null $default
+     * @param null   $default
+     *
      * @return array|mixed|null
      */
-    function array_get(array $array, string $key, $default = null )
+    function array_get(array $array, string $key, $default = null)
     {
         //  Текущий уровень
         $currentLevel =& $array;
@@ -43,25 +30,25 @@ if (! function_exists('array_get')) {
                 return ((empty($currentLevel[$levelKey])) ? $default : $currentLevel[$levelKey]);
             }
         }
+
         // возвращает значение $currentLevel или значение по дефолту
         return ((empty($currentLevel)) ? $default : $currentLevel);
     }
 }
 
-if (! function_exists('config')) {
+if (!function_exists('config')) {
     /**
      * @param $key
      * @param $default
      *
      * @return array|void
      */
-    function config($key = null, $default = null) {
-
+    function config($key = null, $default = null)
+    {
         if ($key === null) {
-            return ;
+            return;
         }
 
         return Config::getInstance()->get($key, $default);
     }
-
 }
