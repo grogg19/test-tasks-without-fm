@@ -22,7 +22,7 @@
         "symfony/yaml": "^5.1",
         "illuminate/session": "^8.13",
         "ext-fileinfo": "*",
-        "twig/twig": "^3.0",
+        "twig/twig": "^3.4",
         "illuminate/pagination": "^8.44",
         "ext-json": "*",
         "vlucas/phpdotenv": "^5.5"
