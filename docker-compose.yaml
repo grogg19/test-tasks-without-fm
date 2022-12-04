@@ -20,7 +20,9 @@ services:
       - "XDEBUG=develop"
       - "XDEBUG_IDE_KEY=${XDEBUG_IDE_KEY:-PHPSTORM}"
       - "XDEBUG_PORT=${XDEBUG_PORT:-9003}"
-
+      - "DB_DATABASE=${DB_DATABASE}"
+      - "DB_USERNAME=${DB_USERNAME}"
+      - "DB_PASSWORD=${DB_PASSWORD}"
     volumes:
       - "./:/var/www/"
 
@@ -46,11 +48,11 @@ services:
     image: alterway/mysql:${MYSQL_VERSION}
     command: --innodb_strict_mode=off --innodb_flush_log_at_trx_commit=2 --innodb_flush_method=O_DIRECT --transaction-isolation=READ-COMMITTED --sql_mode=
     environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      LOCALTIME: ${LOCALTIME:-Europe/Moscow}
+      - "DB_DATABASE: ${DB_DATABASE}"
+      - "MYSQL_USER: ${DB_USERNAME}"
+      - "MYSQL_PASSWORD: ${DB_PASSWORD}"
+      - "MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}"
+      - "LOCALTIME: ${LOCALTIME:-Europe/Moscow}"
     volumes:
       - "./.docker/volume/db/:/var/lib/mysql/:delegated"
     ports:
