@@ -2,16 +2,19 @@
 
 namespace App\Controllers;
 
+use App\Renderable;
+use App\View;
+
 /**
  * Контроллер для первого задания
  */
 class CustomerController extends Controller
 {
     /**
-     * @return string
+     * @return View
      */
-    public function index()
+    public function index(): Renderable
     {
-        return 'test';
+        return new View('tasks.first_task');
     }
 }
