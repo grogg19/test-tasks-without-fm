@@ -1,0 +1,18 @@
+{% include('base/header.html.twig') %}
+<h1>Задача №2</h1>
+<p class="fs-5 col-md-8">Есть два целых числа в виде строки длиной до 1000 знаков.</p>
+<p class="fs-5 col-md-8">Использовать различные библиотеки или “exec” - нельзя.</p>
+<p class="fs-5 col-md-8">Придумать, как получить сумму этих чисел.</p>
+<hr class="col-3 col-md-2 mb-5">
+<div class="row g-5">
+    <div class="col-md-12">
+        <p>Проблему подсчета суммы больших чисел можно решить обычным способом сложения столбиком, оба числа при этом должны быть в виде строки.</p>
+        <p>Два числа для примера:</p>
+        <ul class="icon-list ps-0">
+            <li class="mb-1 text-break">{{ firstNumber }}</li>
+            <li class="mb-1 text-break">{{ secondNumber }}</li>
+        </ul>
+        <p class="text-break"><strong>Сумма двух чисел:</strong> {{ totalSum }}</p>
+    </div>
+</div>
+{% include('base/footer.html.twig') %}
