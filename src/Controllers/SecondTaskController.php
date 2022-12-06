@@ -9,7 +9,7 @@ use App\View;
 /**
  * Контроллер для второго задания
  */
-class AdditionBigNumbersController extends Controller
+class SecondTaskController extends Controller
 {
     /**
      * @return View
@@ -25,7 +25,7 @@ class AdditionBigNumbersController extends Controller
         return new View('tasks.second_task', [
             'firstNumber'  => $firstNumber,
             'secondNumber' => $secondNumber,
-            'totalSum'     => $sum
+            'totalSum'     => $sum,
         ]);
     }
 }
