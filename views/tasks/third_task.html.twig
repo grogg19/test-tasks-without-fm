@@ -1,0 +1,53 @@
+{% include('base/header.html.twig') %}
+<h2>Задача №3</h2>
+<p class="fs-5 col-md-8">Есть таблица со значениями:</p>
+<pre>
+    CREATE TABLE `table` (`id` INT(11) NOT NULL PRIMARY KEY);
+</pre>
+<pre>
+    INSERT INTO `table` (`id`) VALUES (1), (2), (3), (5), (6), (8), (9), (10), (12);
+</pre>
+<p class="fs-5 col-md-10">Необходимо написать запрос, который выведет все промежутки в значениях.</p>
+<p class="fs-5 col-md-10">На выходе должно получиться:</p>
+<table>
+    <tr class="text-center">
+        <th>FROM</th>
+        <th>TO</th>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>8</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>12</td>
+    </tr>
+</table>
+<hr class="col-3 col-md-2 mb-5">
+<div class="row g-5">
+    <div class="col-md-12">
+        <h4>Одно из найденных решений:</h4>
+        <pre>
+SELECT
+    left_id AS 'FROM',
+    right_id AS 'TO'
+FROM (
+        SELECT table1.id AS left_id, table2.id AS middle_id,
+             (
+                 SELECT id FROM table_name AS table3
+                 WHERE table3.id > table1.id
+                 ORDER BY id
+                 LIMIT 1
+             ) AS right_id
+             FROM table_name AS table1
+        LEFT JOIN table_name AS table2 ON table2.id = table1.id + 1
+    ) AS temp_name
+WHERE right_id IS NOT NULL AND middle_id IS NULL
+        </pre>
+    </div>
+</div>
+{% include('base/footer.html.twig') %}
