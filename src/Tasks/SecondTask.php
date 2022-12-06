@@ -33,7 +33,7 @@ class SecondTask
             $temp = 0;
 
             if ($sum >= 10) {
-                $sum  = $sum % 10;
+                $sum  %= 10;
                 $temp = 1;
             }
             $totalSum = $sum . $totalSum; // добавляем сумму чисел к итоговому результату
