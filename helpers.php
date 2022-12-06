@@ -1,6 +1,7 @@
 <?php
 
 use App\Config;
+use Carbon\Carbon;
 
 if (!function_exists('array_get')) {
     /**
@@ -50,5 +51,21 @@ if (!function_exists('config')) {
         }
 
         return Config::getInstance()->get($key, $default);
+    }
+}
+
+if (!function_exists('getYearOfBirthByAge')) {
+    /**
+     * @param int $age
+     *
+     * @return int|void
+     */
+    function getYearOfBirthByAge(int $age = 0)
+    {
+        if ($age === 0) {
+            return;
+        }
+
+        return Carbon::now()->year - $age;
     }
 }
