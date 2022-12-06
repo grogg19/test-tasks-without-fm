@@ -50,8 +50,8 @@ class View implements Renderable
         ]);
 
         $twig->addExtension(new DebugExtension());
-
         $twig->addGlobal('currentUrl', $_SERVER['REQUEST_URI']);
+        $twig->addGlobal('fullSiteUrl', env('SITE_URL'));
 
         echo $twig->render($this->view, $this->parameters);
     }
