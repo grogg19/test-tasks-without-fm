@@ -1,30 +1,20 @@
 {% include('base/header.html.twig') %}
-<h1>Задача №1</h1>
-<p class="fs-5 col-md-8">Quickly and easily get started with Bootstrap's compiled, production-ready files with this barebones example featuring some basic HTML and helpful
-    links. Download all our examples to get started.</p>
-
+<h2>Задача №1</h2>
+<p class="fs-5 col-md-10">Функционал возвращает список имен и количество книг у юношей и девушек в возрасте с заданным интервалом. Список должен быть сформирован ссылками на
+    страницу конкретного человека. Ссылки должны быть сформированы в валидном url, содержащие корень текущего домена, протокол передачи и текущую папку в домене.</p>
+<p>Ccылка для примера из задачи:</p>
+<a href="{{ fullSiteUrl }}/customers/?customer_ids=1,2,3,4,5&years=15,20&author=Стругацкие">{{ fullSiteUrl }}/customers/?customer_ids=1,2,3,4,5&years=15,20&author=Стругацкие
+</a>
 <hr class="col-3 col-md-2 mb-5">
-
-<div class="row g-5">
-    <div class="col-md-6">
-        <h2>Starter projects</h2>
-        <p>Ready to beyond the starter template? Check out these open source projects that you can quickly duplicate to a new GitHub repository.</p>
-        <ul class="icon-list ps-0">
-            <li class="d-flex align-items-start mb-1"><a href="https://github.com/twbs/bootstrap-npm-starter" rel="noopener" target="_blank">Bootstrap npm starter</a></li>
-            <li class="text-muted d-flex align-items-start mb-1">Bootstrap Parcel starter (coming soon!)</li>
-        </ul>
-    </div>
-
-    <div class="col-md-6">
-        <h2>Guides</h2>
-        <p>Read more detailed instructions and documentation on using or contributing to Bootstrap.</p>
-        <ul class="icon-list ps-0">
-            <li class="d-flex align-items-start mb-1"><a href="../getting-started/introduction/">Bootstrap quick start guide</a></li>
-            <li class="d-flex align-items-start mb-1"><a href="../getting-started/webpack/">Bootstrap Webpack guide</a></li>
-            <li class="d-flex align-items-start mb-1"><a href="../getting-started/parcel/">Bootstrap Parcel guide</a></li>
-            <li class="d-flex align-items-start mb-1"><a href="../getting-started/vite/">Bootstrap Vite guide</a></li>
-            <li class="d-flex align-items-start mb-1"><a href="../getting-started/contribute/">Contributing to Bootstrap</a></li>
-        </ul>
-    </div>
+<div>
+    <h3>Customers</h3>
+    {% if customers|length > 0 %}
+        {% for customer in customers %}
+            <p><a href="{{ fullSiteUrl }}/customers/?id={{ customer.id }}">{{ customer.last_name }} {{ customer.first_name }} ({{ customer.books_count }})</a></p>
+        {% endfor %}
+    {% else %}
+        <p>Нет элементов удовлетворяющих условиям</p>
+    {% endif %}
 </div>
+
 {% include('base/footer.html.twig') %}
