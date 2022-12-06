@@ -49,12 +49,13 @@ services:
     image: alterway/mysql:${MYSQL_VERSION}
     command: --innodb_strict_mode=off --innodb_flush_log_at_trx_commit=2 --innodb_flush_method=O_DIRECT --transaction-isolation=READ-COMMITTED --sql_mode=
     environment:
-      - "DB_DATABASE: ${DB_DATABASE}"
-      - "MYSQL_USER: ${DB_USERNAME}"
-      - "MYSQL_PASSWORD: ${DB_PASSWORD}"
-      - "MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}"
-      - "LOCALTIME: ${LOCALTIME:-Europe/Moscow}"
+      DB_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      LOCALTIME: ${LOCALTIME:-Europe/Moscow}
     volumes:
+      - "./init:/docker-entrypoint-initdb.d"
       - "./.docker/volume/db/:/var/lib/mysql/:delegated"
     ports:
       - "3306:3306"
