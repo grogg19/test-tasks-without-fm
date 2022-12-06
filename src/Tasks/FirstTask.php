@@ -34,11 +34,11 @@ class FirstTask
             $customerIds = explode(',', $request->get('customer_ids'));
             $customerIds = array_filter($customerIds, static fn($value) => ($value !== null) && ($value !== ''));
         }
-
+        
         if ($request->get('years')) {
             $ages     = explode(',', $request->get('years'));
-            $agesFrom = max($ages);
-            $agesTo   = min($ages);
+            $agesFrom = (int)max($ages);
+            $agesTo   = (int)min($ages);
         }
 
         if (!empty($agesFrom) && !empty($agesTo)) {
